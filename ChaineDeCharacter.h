@@ -16,7 +16,6 @@ class ChaineDeCharacter
         ChaineDeCharacter(ChaineDeCharacter const& ChaineDeCharacterToCopy);
         ~ChaineDeCharacter();
         unsigned int longueur() const;
-        void affiche();
         void ajout_fin(char c);
 
         ChaineDeCharacter& operator+=(ChaineDeCharacter const& ChaineDeCharacterToCopy);
