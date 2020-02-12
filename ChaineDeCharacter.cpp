@@ -33,14 +33,6 @@ unsigned int ChaineDeCharacter::longueur() const
     return m_long;
 }
 
-void ChaineDeCharacter::affiche()
-{
-    std::cout << m_car;
-//    int lg = 0;
-//    while(m_car[lg] != '\0')
-//        std::cout << m_car[lg++];
-}
-
 void ChaineDeCharacter::ajout_fin(char c)
 {
     char * tmp_car = new char[++m_long+1]; // m_long +1 ??
