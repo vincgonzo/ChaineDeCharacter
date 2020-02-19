@@ -43,19 +43,26 @@ delete[] m_car;
     m_car = tmp_car;
 }
 
-// Operator rewrite
-ostream& operator<<(ostream &flux, ChaineDeCharacter const& a )
+void ChaineDeCharacter::mettreMaj()
 {
-    flux << a.m_car;
-    return flux;
+    for(int i=0; i < m_long; i++)
+    {
+        m_car[i] = toupper(m_car[i]);
+    }
+}
+
+bool ChaineDeCharacter::isEgal(ChaineDeCharacter const& ch) const
+{
+    return (m_long == ch.m_long && (strcmp(m_car, ch.m_car)==0))? true : false;
 }
 
 
+// Operator rewrite
 ChaineDeCharacter& ChaineDeCharacter::operator+=(ChaineDeCharacter const& ChaineDeCharacterToCopy)
 {
     int tmp_lg = m_long;
     m_long += ChaineDeCharacterToCopy.m_long;
-    char * tmp_car= new char[m_long+1];
+    char * tmp_car = new char[m_long+1];
     strcpy(tmp_car, m_car);
     strcpy(tmp_car + tmp_lg, ChaineDeCharacterToCopy.m_car);
 delete[] m_car;
@@ -74,4 +81,21 @@ ChaineDeCharacter& ChaineDeCharacter::operator=(const ChaineDeCharacter& ChaineD
             strcpy(m_car, ChaineDeCharacterToCopy.m_car);
         }
         return *this;
+}
+
+// External rewrite
+ostream& operator<<(ostream &flux, ChaineDeCharacter const& a )
+{
+    flux << a.m_car;
+    return flux;
+}
+
+bool operator==(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
+{
+        return a.isEgal(b);
+}
+
+bool operator!=(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
+{
+        return a.isEgal(b);
 }
