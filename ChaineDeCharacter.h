@@ -18,15 +18,21 @@ class ChaineDeCharacter
         unsigned int longueur() const;
         void ajout_fin(char c);
         void mettreMaj();
-        bool isEgal(ChaineDeCharacter const& ch) const;
+        int compare(ChaineDeCharacter const& ch) const;
+        bool memeLongueur(ChaineDeCharacter const& ch) const;
 
         ChaineDeCharacter& operator+=(ChaineDeCharacter const& ChaineDeCharacterToCopy);
         ChaineDeCharacter& operator=(ChaineDeCharacter const& ChaineDeCharacterToCopy);
+        operator int() const;
 
         friend std::ostream& operator<<(std::ostream &flux, ChaineDeCharacter const& a);
 };
 
 bool operator==(ChaineDeCharacter const& a, ChaineDeCharacter const& b);
 bool operator!=(ChaineDeCharacter const& a, ChaineDeCharacter const& b);
+bool operator>=(ChaineDeCharacter const& a, ChaineDeCharacter const& b);
+bool operator<=(ChaineDeCharacter const& a, ChaineDeCharacter const& b);
+bool operator>(ChaineDeCharacter const& a, ChaineDeCharacter const& b);
+bool operator<(ChaineDeCharacter const& a, ChaineDeCharacter const& b);
 
 #endif // CHAINEDECHARACTER_H_INCLUDED
