@@ -3,6 +3,7 @@
 #include <cstring>
 #include <string>
 #include <memory>
+#include <cmath>
 #include <stdlib.h>
 
 using namespace std;
@@ -50,10 +51,14 @@ void ChaineDeCharacter::mettreMaj()
         m_car[i] = toupper(m_car[i]);
     }
 }
-
-bool ChaineDeCharacter::isEgal(ChaineDeCharacter const& ch) const
+int ChaineDeCharacter::compare(ChaineDeCharacter const& ch) const
 {
-    return (m_long == ch.m_long && (strcmp(m_car, ch.m_car)==0))? true : false;
+    return strcmp(m_car, ch.m_car);
+}
+
+bool ChaineDeCharacter::memeLongueur(ChaineDeCharacter const& ch) const
+{
+    return (m_long == ch.m_long)? true : false;
 }
 
 
@@ -70,8 +75,22 @@ delete[] m_car;
 
     return *this;
 }
+ChaineDeCharacter::operator int() const
+{
+    int tmp(0);
+    for(int i(0); i < m_long; i++)
+    {
+     // clockwise thinking
+     //tmp += (m_car[i] - '0') * pow(10, ((m_long-i)-1));
+     // or
+     tmp *= 10;
+     tmp += (m_car[i] - '0');
+    }
+    return tmp;
+    //return atoi(m_car); // LAZY version ;)
+}
 
-ChaineDeCharacter& ChaineDeCharacter::operator=(const ChaineDeCharacter& ChaineDeCharacterToCopy)
+ChaineDeCharacter& ChaineDeCharacter::operator=(ChaineDeCharacter const& ChaineDeCharacterToCopy)
 {
         if(this != &ChaineDeCharacterToCopy)
         {
@@ -92,10 +111,30 @@ ostream& operator<<(ostream &flux, ChaineDeCharacter const& a )
 
 bool operator==(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
 {
-        return a.isEgal(b);
+    return (a.compare(b) == 0 && a.memeLongueur(b))? true : false;
 }
 
 bool operator!=(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
 {
-        return a.isEgal(b);
+    return (a.compare(b) != 0 || a.memeLongueur(b))? true : false;
+}
+
+bool operator>=(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
+{
+    return (a.compare(b) >= 0)? true : false;
+}
+
+bool operator<=(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
+{
+    return (a.compare(b) <= 0)? true : false;
+}
+
+bool operator>(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
+{
+    return (a.compare(b) > 0)? true : false;
+}
+
+bool operator<(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
+{
+    return (a.compare(b) < 0)? true : false;
 }
