@@ -51,14 +51,10 @@ void ChaineDeCharacter::mettreMaj()
         m_car[i] = toupper(m_car[i]);
     }
 }
+
 int ChaineDeCharacter::compare(ChaineDeCharacter const& ch) const
 {
     return strcmp(m_car, ch.m_car);
-}
-
-bool ChaineDeCharacter::memeLongueur(ChaineDeCharacter const& ch) const
-{
-    return (m_long == ch.m_long)? true : false;
 }
 
 
@@ -75,6 +71,7 @@ delete[] m_car;
 
     return *this;
 }
+
 ChaineDeCharacter::operator int() const
 {
     int tmp(0);
@@ -102,6 +99,11 @@ ChaineDeCharacter& ChaineDeCharacter::operator=(ChaineDeCharacter const& ChaineD
         return *this;
 }
 
+char ChaineDeCharacter::operator[](unsigned int const c) const
+{
+    return m_car[c];
+}
+
 // External rewrite
 ostream& operator<<(ostream &flux, ChaineDeCharacter const& a )
 {
@@ -111,12 +113,12 @@ ostream& operator<<(ostream &flux, ChaineDeCharacter const& a )
 
 bool operator==(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
 {
-    return (a.compare(b) == 0 && a.memeLongueur(b))? true : false;
+    return (a.compare(b) == 0)? true : false;
 }
 
 bool operator!=(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
 {
-    return (a.compare(b) != 0 || a.memeLongueur(b))? true : false;
+    return (a.compare(b) != 0)? true : false;
 }
 
 bool operator>=(ChaineDeCharacter const& a, ChaineDeCharacter const& b)
